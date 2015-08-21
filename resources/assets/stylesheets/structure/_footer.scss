@@ -1,0 +1,11 @@
+#footer {
+	display: flex;
+	flex-basis: 100%;
+	margin-top: $small-spacing;
+	width: 100%;
+
+	.legal-jabber {
+		color: shade($base-font-color, 20%);
+		font-size: $base-font-size * 0.7;
+	}
+}
