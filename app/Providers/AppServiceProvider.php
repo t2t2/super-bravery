@@ -3,6 +3,7 @@
 namespace t2t2\SuperBravery\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Laravel\Lumen\Application;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -13,6 +14,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+	    /** @var Application $app */
+	    $app = $this->app;
+
+	    // Add riot config
+	    $app->configure('riot');
     }
 }

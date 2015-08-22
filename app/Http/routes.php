@@ -12,3 +12,7 @@
 */
 
 $app->get('/', 'FrontendController@serve');
+
+$app->get('/test', function (\t2t2\SuperBravery\Riot\StaticData $static) {
+	dump($static->version());
+});

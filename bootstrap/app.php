@@ -78,7 +78,7 @@ $app->middleware([
 |
 */
 
-// $app->register(t2t2\SuperBravery\Providers\AppServiceProvider::class);
+$app->register(t2t2\SuperBravery\Providers\AppServiceProvider::class);
 // $app->register(t2t2\SuperBravery\Providers\EventServiceProvider::class);
 
 /*
