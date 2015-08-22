@@ -11,8 +11,17 @@
 |
 */
 
+$app->group(['namespace' => 't2t2\SuperBravery\Http\Controllers\Api', 'prefix' => 'api'], function (\Laravel\Lumen\Application $app) {
+
+	$app->post('roll', [
+		'as'   => 'api.generator.roll',
+		'uses' => 'GeneratorController@roll',
+	]);
+
+});
+
 $app->get('/', 'FrontendController@serve');
 
 $app->get('/test', function (\t2t2\SuperBravery\Riot\StaticData $static) {
-	dump($static->version());
+	dump($static->champions());
 });

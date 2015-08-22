@@ -15,20 +15,31 @@ class StaticData {
 	 * @var int
 	 */
 	static protected $versionCache = 180;
+
+	/**
+	 * Cache static data for 4 weeks (in minutes)
+	 *
+	 * @var int
+	 */
+	static protected $dataCache = 40320;
+
 	/**
 	 * @var CacheRepository|CacheStore
 	 */
 	protected $cache;
+
 	/**
 	 * @var ConfigRepository
 	 */
 	protected $config;
+
 	/**
 	 * Region which versions and data to use
 	 *
 	 * @var string
 	 */
 	protected $region;
+
 	/**
 	 * Cache of region's current versions
 	 *
@@ -63,6 +74,28 @@ class StaticData {
 	}
 
 	/**
+	 * Get the current champions
+	 *
+	 * @return mixed
+	 */
+	public function champions() {
+		$version = $this->version('champion');
+
+		$key = 'riot.static.' . $this->region . '.champions.' . $version;
+		$champions = $this->cache->remember($key, self::$dataCache, function () use ($version) {
+			$response = $this->getClient()->staticRequest($this->region, 'champion', null, [
+				'version'   => $version,
+				'champData' => 'image,spells',
+			]);
+			$champions_data = json_decode($response->getBody(), true);
+
+			return $champions_data['data'];
+		});
+
+		return $champions;
+	}
+
+	/**
 	 * Get the current versions for this region
 	 *
 	 * @param null $type
@@ -71,17 +104,16 @@ class StaticData {
 	 */
 	public function version($type = null) {
 		if (!$this->versions) {
-			$this->versions = $this->cache->remember('riot.static.' . $this->region . '.realm', self::$versionCache,
-				function () {
-					$response = $this->getClient()->staticRequest($this->region, 'realm');
-					$realm_info = json_decode($response->getBody(), true);
+			$key = 'riot.static.' . $this->region . '.realm';
+			$this->versions = $this->cache->remember($key, self::$versionCache, function () {
+				$response = $this->getClient()->staticRequest($this->region, 'realm');
+				$realm_info = json_decode($response->getBody(), true);
 
-					return $realm_info['n'] + [
-						'cdn'  => $realm_info['cdn'],
-						'meta' => $realm_info['v'],
-					];
-				}
-			);
+				return $realm_info['n'] + [
+					'cdn'  => $realm_info['cdn'],
+					'meta' => $realm_info['v'],
+				];
+			});
 		}
 
 		if ($type) {
