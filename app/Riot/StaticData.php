@@ -96,6 +96,27 @@ class StaticData {
 	}
 
 	/**
+	 * Get the maps data.
+	 *
+	 * POLYFILLED!
+	 *
+	 * @return mixed
+	 */
+	public function maps() {
+		$version = $this->version('champion');
+
+		$key = 'riot.static.' . $this->region . '.maps.' . $version;
+		$maps = $this->cache->remember($key, self::$dataCache, function () use ($version) {
+			// NOTE: Polyfilled!
+			$maps = require(storage_path('polyfills/map.php'));
+			return $maps;
+		});
+
+		return $maps;
+
+	}
+
+	/**
 	 * Get the current versions for this region
 	 *
 	 * @param null $type
