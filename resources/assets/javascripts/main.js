@@ -1,3 +1,5 @@
+import 'babel-core/polyfill'
+
 // Install router
 import Vue from 'vue'
 import VueRouter from 'vue-router'
