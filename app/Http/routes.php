@@ -24,7 +24,9 @@ $app->group(['namespace' => 't2t2\SuperBravery\Http\Controllers\Api', 'prefix' =
 
 $app->group(['namespace' => 't2t2\SuperBravery\Http\Controllers'], function (Application $app) {
 
-	$app->get('/', 'FrontendController@serve');
+	$app->get('/', ['as' => 'frontend.serve', 'uses' => 'FrontendController@serve']);
+
+	$app->get('/config', ['as' => 'frontend.config', 'uses' => 'FrontendController@config']);
 
 });
 

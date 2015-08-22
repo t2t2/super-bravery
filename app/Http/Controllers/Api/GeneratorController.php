@@ -31,6 +31,11 @@ class GeneratorController extends Controller {
 		]);
 	}
 
+	/**
+	 * Choose a random champion
+	 *
+	 * @return mixed
+	 */
 	protected function rollChampion() {
 		$champions = $this->static->champions();
 		$champ_key = array_rand($champions);
