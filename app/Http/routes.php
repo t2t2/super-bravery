@@ -24,10 +24,18 @@ $app->group(['namespace' => 't2t2\SuperBravery\Http\Controllers\Api', 'prefix' =
 
 $app->group(['namespace' => 't2t2\SuperBravery\Http\Controllers'], function (Application $app) {
 
-	$app->get('/', ['as' => 'frontend.serve', 'uses' => 'FrontendController@serve']);
-
 	$app->get('/config', ['as' => 'frontend.config', 'uses' => 'FrontendController@config']);
 
+	$app->get('/', ['as' => 'frontend.serve', 'uses' => 'FrontendController@serve']);
+
+	$frontendPaths = [
+		'/build/{build}',
+		'/build',
+	];
+
+	foreach($frontendPaths as $path) {
+		$app->get($path, ['uses' => 'FrontendController@serve']);
+	}
 });
 
 $app->get('/test', function (\t2t2\SuperBravery\Riot\StaticData $static) {

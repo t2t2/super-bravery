@@ -6,7 +6,7 @@ module.exports = function (env) {
 
 	var jsSrc = path.resolve(paths.sourceAssets + '/javascripts/'),
 		jsDest = paths.publicAssets + '/javascripts/',
-		publicPath = 'assets/javascripts/'
+		publicPath = '/assets/javascripts/'
 
 	var webpackConfig = {
 		context: jsSrc,
