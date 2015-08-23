@@ -11,7 +11,8 @@ export default Vue.extend({
 				versions:  {
 					cdn: 'http://ddragon.leagueoflegends.com/cdn'
 				},
-				champions: []
+				champions: [],
+				items: []
 			},
 			isLoading: true,
 		}
@@ -34,6 +35,7 @@ export default Vue.extend({
 		this.$http.get(document.body.getAttribute('data-config')).success((configured) => {
 			this.$data.config.versions = configured.data.versions
 			this.$data.config.champions = configured.data.champions.data
+			this.$data.config.items = configured.data.items.data
 			this.$data.isLoading = false
 		});
 

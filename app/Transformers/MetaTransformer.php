@@ -9,7 +9,8 @@ use t2t2\SuperBravery\MetaState;
 class MetaTransformer extends TransformerAbstract {
 
 	protected $availableIncludes = [
-		'champions'
+		'champions',
+		'items'
 	];
 
 	/**
@@ -29,6 +30,12 @@ class MetaTransformer extends TransformerAbstract {
 		$champions = $state->static->champions();
 
 		return $this->collection($champions, new ChampionTransformer());
+	}
+	
+	public function includeItems(MetaState $state) {
+		$items = $state->static->items();
+		
+		return $this->collection($items, new ItemTransformer());
 	}
 
 }

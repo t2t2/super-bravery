@@ -19,16 +19,16 @@ export default Vue.extend({
 			}
 			return undefined;
 		},
-		name:     function () {
+		name: function () {
 			return this.champion ? this.champion.name : '';
 		},
-		image:    function () {
+		image: function () {
 			if (this.champion) {
 				return this.$root.imageURL('champion', this.champion.image.full);
 			} else {
 				return '';
 			}
-		},
+		}
 	},
 
 	data: function () {
@@ -38,5 +38,13 @@ export default Vue.extend({
 	props: {
 		championId:  null,
 		championKey: String,
+		championHeight: {
+			type: Number,
+			default: 32
+		},
+		championWidth: {
+			type: Number,
+			default: 32
+		}
 	},
 })

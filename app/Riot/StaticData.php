@@ -96,6 +96,28 @@ class StaticData {
 	}
 
 	/**
+	 * Get the items
+	 *
+	 * @return mixed
+	 */
+	 public function items() {
+		$version = $this->version('item');
+
+		$key = 'riot.static.' . $this->region . '.items.' . $version;
+		$items = $this->cache->remember($key, self::$dataCache, function () use ($version) {
+			$response = $this->getClient()->staticRequest($this->region, 'item', null, [
+				'version'   => $version,
+				'itemListData' => 'requiredChampion,gold,stats,image',
+			]);
+			$items_data = json_decode($response->getBody(), true);
+
+			return $items_data['data'];
+		});
+
+		return $items;
+	}
+
+	/**
 	 * Get the maps data.
 	 *
 	 * POLYFILLED!
