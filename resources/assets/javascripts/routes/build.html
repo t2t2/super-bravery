@@ -1,3 +1,19 @@
 <div id="content">
-	Payload: {{$route.params.payload}}
+	<div class='container'>
+		<h1>{{ build.name | uppercase }}</h1>
+		<Champion champion-key="{{ build.champion.key }}" champion-width="96" champion-height="96"></Champion>
+		<Item v-repeat="itemId in build.items"></Item>
+		
+		<div class='skill-order'>
+			<div v-repeat="spell in build.champion.spells" class='skill'>
+				<div class='line'>
+					<!-- TODO: Skill icons which you can hover for details -->
+					<div v-repeat="choice in build.skillOrder[$index]" class="entry {{ choice ? 'choice' : 'empty'}}">
+						{{ $index + 1 }}
+					</div>
+				</div>
+			</div>
+		</div>
+		
+	</div>
 </div>

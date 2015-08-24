@@ -1,20 +1,17 @@
 <div id="application">
-	<header class="header">
-		<div class="logo-container">
-			<a v-link="/">Super Ultimate Bravery</a>
-		</div>
-		<div class="menu-container">
-		</div>
+	<header class="header container">
+		<a v-link="/">Super Ultimate Bravery</a>
 	</header>
 
 	<router-view></router-view>
 
 	<footer id="footer">
-
-		<p class="legal-jabber">
-			Super Ultimate Bravery isn't endorsed by Riot Games and doesn't reflect the views or opinions of Riot Games
-			or anyone officially involved in producing or managing League of Legends. League of Legends and Riot Games
-			are trademarks or registered trademarks of Riot Games, Inc. League of Legends © Riot Games, Inc.
-		</p>
+		<div class="container">
+			<p class="legal-jabber">
+				Super Ultimate Bravery isn't endorsed by Riot Games and doesn't reflect the views or opinions of Riot Games
+				or anyone officially involved in producing or managing League of Legends. League of Legends and Riot Games
+				are trademarks or registered trademarks of Riot Games, Inc. League of Legends © Riot Games, Inc.
+			</p>
+		</div>
 	</footer>
 </div>

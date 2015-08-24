@@ -7,3 +7,139 @@
 @import "structure/header";
 @import "structure/content";
 @import "structure/footer";
+
+.container {
+	width: 600px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+section {
+	border-bottom: 1px solid $light-gray;
+	border-left: 2px solid $light-gray;
+	border-bottom-left-radius: 3px;
+	padding: 5px;
+	margin: 20px 0;
+}
+
+button {
+	appearance: none;
+	background-color: transparent;
+  	border: 2px solid $action-color;
+	color: $action-color;
+	cursor: pointer;
+	display: inline-block;
+	font-family: $base-font-family;
+	font-size: $base-font-size;
+	-webkit-font-smoothing: antialiased;
+	font-weight: 600;
+	line-height: 1;
+	padding: $small-spacing $base-spacing;
+	text-decoration: none;
+	transition: background-color $base-duration $base-timing;
+	user-select: none;
+	vertical-align: middle;
+	white-space: nowrap;
+
+	&:hover, &:focus {
+		border-color: shade($action-color, 20%);
+		color: shade($action-color, 20%);
+	}
+	
+	&:disabled {
+		cursor: not-allowed;
+		opacity: 0.5;
+	}
+	
+	&.block {
+		width: 100%;
+	}
+}
+
+.checkbox {
+	width: 20px;
+	position: relative;
+	margin: 20px 5px;
+	
+	label {
+		width: 20px;
+		height: 20px;
+		cursor: pointer;
+		position: absolute;
+		top: 0;
+		left: 0;
+		background: #fcfff4;
+		background: linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+		border: 1px solid $light-gray;
+		
+		img {
+			opacity: .5;
+		}
+		
+		&:after {
+			content: '';
+			width: 9px;
+			height: 5px;
+			position: absolute;
+			top: 6px;
+			left: 5px;
+			border: 3px solid #333;
+			border-top: none;
+			border-right: none;
+			background: transparent;
+			opacity: 0;
+			transform: rotate(-45deg);
+		}
+		
+		&:hover::after {
+			opacity: 0.5;
+		}
+	}
+	
+	input[type=checkbox] {
+		visibility: hidden;
+		
+		&:checked + label:after {
+			opacity: 1;
+		}
+	}    
+}
+
+#settings {
+	display: block;
+	margin-top: 10px;
+}
+
+.expand-transition {
+	transition: all .3s ease;
+}
+.expand-enter, .expand-leave {
+	height: 0;
+	padding: 0 10px;
+	opacity: 0;
+}
+
+.skill-order {
+	display: block;
+	width: 100%;
+	
+	.skill {
+		display: block;
+		margin: 2px;
+		
+		.entry {
+			display: inline-block;
+			width: 32px;
+			height: 32px;
+			text-align: center;
+			line-height: 32px;
+			border: 1px solid $light-gray;
+			
+			&.choice {
+				border-color: $action-color;
+				background-color: $action-color;
+				color: white;
+			}
+		}
+	}
+}

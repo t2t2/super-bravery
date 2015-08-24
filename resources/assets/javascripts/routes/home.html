@@ -1,4 +1,63 @@
 <div id="content">
-	<p>Home Page</p>
-	<Champion champion-key="Thresh"></Champion>
+	<div class="container">
+		<section>
+			<h2>What is this?</h2>
+			<p>
+				Super Ultimate Bravery is a challenge based on 
+				<a href="http://www.ultimate-bravery.com/">Ultimate Bravery</a> 
+				where you are given a random champion, skill order and item build which 
+				you must follow.
+			</p>
+		</section>
+		
+		<section>
+			<h2>How does it work?</h2>
+			<p>
+				You just click the button below. If you need to specify what champions you 
+				own or what map you want to play on you can click on the settings link below.
+			</p>
+			<p>
+				You can use the channel 'Ultimate Bravery' on the league client to find people
+				to play with. We highly suggest having a pre-made group of five.a
+			</p>
+		</section>
+		
+		<section v-if="!isAgreed">
+			<h2>Please remember...</h2>
+			<p>
+				If you are not in a pre-made group of five that you are playing with other
+				people and they might not like that you are following the build/item paths
+				provided here. We cannot be responsable for getting your account banned for 
+				'trolling'. We highly suggest playing in a group. You can use the channel
+				'Ultimate Bravery' on the league client to find people to play with.
+			</p>
+			<i>I have read and understand</i>
+			<span v-on="click: setAgreed($event)" class="checkbox">
+				<input type="checkbox" id="checkbox" name="check" />
+				<label for="checkbox"></label>
+			</span>
+		</section>
+		
+		<button class="block" disabled="{{!isAgreed}}">one in ten are brave enough to click.</button>
+		
+		<small>
+			<a href="#" v-on="click: toggleSettings($event)">
+				{{ showSettings ? '-' : '+' }} settings
+			</a>
+		</small>
+		
+		<div id="settings" v-if="showSettings" v-transition="expand">
+			<h3>Settings</h3>
+			
+			<span v-repeat="maps | orderBy 'key'">
+				<input type="radio" id="map-{{key}}" name="map-{{key}}" />
+				<label for="map-{{key}}">{{key}}</label>
+			</span>
+			
+			<span v-repeat="champions | orderBy 'key'">
+				<Champion champion-key="{{key}}"></Champion>
+			</span>
+		</div>
+		
+	</div>
 </div>
