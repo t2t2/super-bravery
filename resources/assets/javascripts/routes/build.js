@@ -12,14 +12,23 @@ export default Vue.extend({
 		champion: championComponent,
 		item: itemComponent
 	},
-	
+
 	computed: {
-		build: function () {
-			return {
+		champion: function() {
+			if(this.$root.$data.config.champions) {
+				return this.$root.$data.config.champions.find((element) => {
+					return element.id == this.$data.build.champion;
+				}, this);
+			}
+			return undefined;
+		}
+	},
+	
+	data: function () {
+		return {
+			build: {
 				name: 'x9 thresh',
-				champion: this.$root.$data.config.champions.find((element) => {
-					return element.id == 412;
-				}, this),
+				champion: 412,
 				items: [1036, 1038, 1339, 3196, 1337, 1332],
 				skillOrder: [
 					[true, true, false, false, true, false, false, true, true, false, false, false, false, false, false, false, false, false],
@@ -28,6 +37,7 @@ export default Vue.extend({
 					[false, false, false, false, false, true, false, false, false, false, true, false, false, false, false, true, false, false],
 				]
 			}
-		}
-	}
+		};
+	},
+
 });
