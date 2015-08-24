@@ -12,7 +12,8 @@ export default Vue.extend({
 					cdn: 'http://ddragon.leagueoflegends.com/cdn'
 				},
 				champions: [],
-				items: []
+				items: [],
+				summonerSpells: [],
 			},
 			isLoading: true,
 		}
@@ -36,6 +37,7 @@ export default Vue.extend({
 			this.$data.config.versions = configured.data.versions
 			this.$data.config.champions = configured.data.champions.data
 			this.$data.config.items = configured.data.items.data
+			this.$data.config.summonerSpells = configured.data.summoner_spells.data
 			this.$data.isLoading = false
 		});
 

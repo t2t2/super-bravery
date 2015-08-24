@@ -125,13 +125,37 @@ class StaticData {
 	 * @return mixed
 	 */
 	public function maps() {
-		$version = $this->version('champion');
+		$version = $this->version('map');
 
 		$key = 'riot.static.' . $this->region . '.maps.' . $version;
 		$maps = $this->cache->remember($key, self::$dataCache, function () use ($version) {
 			// NOTE: Polyfilled!
 			$maps = require(storage_path('polyfills/map.php'));
 			return $maps;
+		});
+
+		return $maps;
+
+	}
+
+	/**
+	 * Get the summoner spells.
+	 *
+	 * @return mixed
+	 */
+	public function summonerSpells() {
+		$version = $this->version('summoner');
+
+		$key = 'riot.static.' . $this->region . '.summoner.' . $version;
+		$maps = $this->cache->remember($key, self::$dataCache, function () use ($version) {
+			$response = $this->getClient()->staticRequest($this->region, 'summoner-spell', null, [
+				'version'   => $version,
+				'spellData' => 'modes,image',
+			]);
+			$items_data = json_decode($response->getBody(), true);
+
+			return $items_data['data'];
+
 		});
 
 		return $maps;

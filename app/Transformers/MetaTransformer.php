@@ -10,7 +10,8 @@ class MetaTransformer extends TransformerAbstract {
 
 	protected $availableIncludes = [
 		'champions',
-		'items'
+		'items',
+		'summoner_spells',
 	];
 
 	/**
@@ -26,16 +27,43 @@ class MetaTransformer extends TransformerAbstract {
 		];
 	}
 
+	/**
+	 * Include champions data
+	 *
+	 * @param MetaState $state
+	 *
+	 * @return \League\Fractal\Resource\Collection
+	 */
 	public function includeChampions(MetaState $state) {
 		$champions = $state->static->champions();
 
 		return $this->collection($champions, new ChampionTransformer());
 	}
-	
+
+	/**
+	 * Include items data
+	 *
+	 * @param MetaState $state
+	 *
+	 * @return \League\Fractal\Resource\Collection
+	 */
 	public function includeItems(MetaState $state) {
 		$items = $state->static->items();
 		
 		return $this->collection($items, new ItemTransformer());
 	}
 
+
+	/**
+	 * Include summoner spells data
+	 *
+	 * @param MetaState $state
+	 *
+	 * @return \League\Fractal\Resource\Collection
+	 */
+	public function includeSummonerSpells(MetaState $state) {
+		$spells = $state->static->summonerSpells();
+
+		return $this->collection($spells,new SummonerSpellTransformer());
+	}
 }
