@@ -12,7 +12,7 @@ export default Vue.extend({
 	components: {
 		champion: championComponent,
 		item: itemComponent,
-		summonerspell: summonerSpellComponent
+		summonerSpell: summonerSpellComponent
 	},
 
 	computed: {

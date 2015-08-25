@@ -7,24 +7,14 @@ export default Vue.extend({
 
 	computed: {
 		summonerSpell: function () {
-			if (this.$root.$data.config.summonerSpells) {
-				return this.$root.$data.config.summonerSpells.find((element) => {
-					if (this.summonerSpellId) {
-						return element.id == this.$data.summonerSpellId;
-					}
-					if (this.summonerSpellKey) {
-						return element.key == this.$data.summonerSpellKey;
-					}
-				}, this);
-			}
-			return undefined;
+			return this.$root.summonerSpells[this.summonerSpellId];
 		},
 		name: function () {
 			return this.summonerSpell ? this.summonerSpell.name : '';
 		},
 		image: function () {
 			if (this.summonerSpell) {
-				return this.$root.imageURL('spell', this.summonerSpell.image.full);
+				return this.$root.imageURL('summoner', this.summonerSpell.image.full);
 			} else {
 				return '';
 			}
@@ -37,12 +27,11 @@ export default Vue.extend({
 
 	props: {
 		summonerSpellId:  null,
-		summonerSpellKey: String,
-		summonerSpellHeight: {
+		height: {
 			type: Number,
 			default: 48
 		},
-		summonerSpellWidth: {
+		width: {
 			type: Number,
 			default: 48
 		}

@@ -39,11 +39,18 @@ export default Vue.extend({
 
 	methods: {
 		imageURL: function (type, file) {
+			var folder = type;
+
+			// remap
+			if(type == 'summoner') {
+				folder = 'spell'
+			}
+
 			return [
 				this.$data.versions.cdn,
 				this.$data.versions[type],
 				'img',
-				type,
+				folder,
 				file
 			].join('/');
 		},
