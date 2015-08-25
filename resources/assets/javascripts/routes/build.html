@@ -1,7 +1,7 @@
 <div id="content">
 	<div class='container'>
 		<h1>{{ build.name | uppercase }}</h1>
-		<Champion v-if="champion" champion-key="{{ champion.key }}" champion-width="96" champion-height="96"></Champion>
+		<Champion v-if="champion" champion-id="{{ champion.id }}" width="96" height="96"></Champion>
 		<Item v-repeat="itemId in build.items"></Item>
 		
 		<SummonerSpell summoner-spell-id="1"></SummonerSpell>

@@ -13,7 +13,7 @@ class ChampionTransformer {
 			'image' => [
 				'full' => $champion['image']['full'],
 			],
-			'spells' => $champion['spells']
+//			'spells' => $champion['spells']
 		];
 	}
 

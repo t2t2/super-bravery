@@ -6,20 +6,10 @@ export default Vue.extend({
 	template,
 
 	computed: {
-		item: function () {
-			if (this.$root.$data.config.items) {
-				return this.$root.$data.config.items.find((element) => {
-					if (this.itemId) {
-						return element.id == this.$data.itemId;
-					}
-					if (this.itemName) {
-						return element.key == this.$data.itemName;
-					}
-				}, this);
-			}
-			return undefined;
+		item:  function () {
+			return this.$root.items[this.itemId]
 		},
-		name: function () {
+		name:  function () {
 			return this.item ? this.item.name : '';
 		},
 		image: function () {
@@ -36,14 +26,13 @@ export default Vue.extend({
 	},
 
 	props: {
-		itemId:  null,
-		itemName: String,
-		itemHeight: {
-			type: Number,
+		itemId: null,
+		height: {
+			type:    Number,
 			default: 48
 		},
-		itemWidth: {
-			type: Number,
+		width:  {
+			type:    Number,
 			default: 48
 		}
 	},

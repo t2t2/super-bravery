@@ -8,6 +8,10 @@ import VueResource from 'vue-resource'
 Vue.use(VueRouter)
 Vue.use(VueResource)
 
+if(process.env.NODE_ENV !== 'production') {
+	Vue.config.debug = true
+}
+
 // Create router
 import { configRouter } from './routes'
 

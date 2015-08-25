@@ -26,10 +26,10 @@ export default Vue.extend({
 	},
 	computed: {
 		champions: function () {
-			return this.$root.$data.config.champions
+			return this.$root.champions
 		},
 		items: function () {
-			return this.$root.$data.config.items
+			return this.$root.items
 		}
 	},
 	methods: {

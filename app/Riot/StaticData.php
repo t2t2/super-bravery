@@ -100,13 +100,13 @@ class StaticData {
 	 *
 	 * @return mixed
 	 */
-	 public function items() {
+	public function items() {
 		$version = $this->version('item');
 
 		$key = 'riot.static.' . $this->region . '.items.' . $version;
 		$items = $this->cache->remember($key, self::$dataCache, function () use ($version) {
 			$response = $this->getClient()->staticRequest($this->region, 'item', null, [
-				'version'   => $version,
+				'version'      => $version,
 				'itemListData' => 'requiredChampion,gold,stats,image',
 			]);
 			$items_data = json_decode($response->getBody(), true);
@@ -118,8 +118,29 @@ class StaticData {
 	}
 
 	/**
-	 * Get the maps data.
+	 * Get the items
 	 *
+	 * @return mixed
+	 */
+	public function languageStrings() {
+		$version = $this->version('language');
+
+		$key = 'riot.static.' . $this->region . '.language.' . $version;
+		$strings = $this->cache->remember($key, self::$dataCache, function () use ($version) {
+			$response = $this->getClient()->staticRequest($this->region, 'language-strings', null, [
+				'version' => $version,
+			]);
+			$strings_data = json_decode($response->getBody(), true);
+
+			return $strings_data['data'];
+		});
+
+		return $strings;
+
+	}
+
+	/**
+	 * Get the maps data.
 	 * POLYFILLED!
 	 *
 	 * @return mixed
@@ -131,7 +152,8 @@ class StaticData {
 		$maps = $this->cache->remember($key, self::$dataCache, function () use ($version) {
 			// NOTE: Polyfilled!
 			$maps = require(storage_path('polyfills/map.php'));
-			return $maps;
+
+			return $maps['data'];
 		});
 
 		return $maps;

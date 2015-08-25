@@ -2,19 +2,36 @@ import Vue from 'vue'
 
 import template from './template.html'
 
+function keyBy(data, key) {
+	return data.reduce((mapped, item) => {
+		mapped[item[key]] = item
+		return mapped
+	}, {});
+}
+
+var defaultVersion = '5.16.1'
+
 export default Vue.extend({
 	template,
 
 	data: function () {
 		return {
-			config:    {
-				versions:  {
-					cdn: 'http://ddragon.leagueoflegends.com/cdn'
-				},
-				champions: [],
-				items: [],
-				summonerSpells: [],
+			versions:       {
+				cdn: 'http://ddragon.leagueoflegends.com/cdn',
+				item: defaultVersion,
+				rune: defaultVersion,
+				mastery: defaultVersion,
+				summoner: defaultVersion,
+				champion: defaultVersion,
+				profileicon: defaultVersion,
+				map: defaultVersion,
+				language: defaultVersion,
+				meta: defaultVersion,
 			},
+			champions:      {},
+			items:          {},
+			maps:           {},
+			summonerSpells: {},
 			isLoading: true,
 		}
 	},
@@ -22,8 +39,8 @@ export default Vue.extend({
 	methods: {
 		imageURL: function (type, file) {
 			return [
-				this.$data.config.versions.cdn,
-				this.$data.config.versions[type],
+				this.$data.versions.cdn,
+				this.$data.versions[type],
 				'img',
 				type,
 				file
@@ -34,10 +51,11 @@ export default Vue.extend({
 	ready: function () {
 		// Load static data from server
 		this.$http.get(document.body.getAttribute('data-config')).success((configured) => {
-			this.$data.config.versions = configured.data.versions
-			this.$data.config.champions = configured.data.champions.data
-			this.$data.config.items = configured.data.items.data
-			this.$data.config.summonerSpells = configured.data.summoner_spells.data
+			this.$data.versions = configured.data.versions
+			this.$data.champions = keyBy(configured.data.champions.data, 'id')
+			this.$data.items = keyBy(configured.data.items.data, 'id')
+			this.$data.maps = keyBy(configured.data.maps.data, 'id')
+			this.$data.summonerSpells = keyBy(configured.data.summoner_spells.data, 'id')
 			this.$data.isLoading = false
 		});
 

@@ -28,7 +28,7 @@ class FrontendController extends Controller {
 	 */
 	public function config(Manager $manager, MetaState $metaState) {
 
-		$manager->parseIncludes(['champions', 'items', 'summoner_spells']);
+		$manager->parseIncludes(['champions', 'items', 'maps', 'summoner_spells']);
 
 		$state = new Item($metaState, new MetaTransformer(), 'state');
 

@@ -8,7 +8,7 @@ import template from './build.html'
 
 export default Vue.extend({
 	template,
-	
+
 	components: {
 		champion: championComponent,
 		item: itemComponent,
@@ -17,15 +17,10 @@ export default Vue.extend({
 
 	computed: {
 		champion: function() {
-			if(this.$root.$data.config.champions) {
-				return this.$root.$data.config.champions.find((element) => {
-					return element.id == this.$data.build.champion;
-				}, this);
-			}
-			return undefined;
+			return this.$root.champions[this.build.champion];
 		}
 	},
-	
+
 	data: function () {
 		return {
 			build: {

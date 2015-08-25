@@ -7,17 +7,7 @@ export default Vue.extend({
 
 	computed: {
 		champion: function () {
-			if (this.$root.$data.config.champions) {
-				return this.$root.$data.config.champions.find((element) => {
-					if (this.championId) {
-						return element.id == this.$data.championId;
-					}
-					if (this.championKey) {
-						return element.key == this.$data.championKey;
-					}
-				}, this);
-			}
-			return undefined;
+			return this.$root.champions[this.championId]
 		},
 		name: function () {
 			return this.champion ? this.champion.name : '';
@@ -37,12 +27,11 @@ export default Vue.extend({
 
 	props: {
 		championId:  null,
-		championKey: String,
-		championHeight: {
+		height: {
 			type: Number,
 			default: 32
 		},
-		championWidth: {
+		width: {
 			type: Number,
 			default: 32
 		}
