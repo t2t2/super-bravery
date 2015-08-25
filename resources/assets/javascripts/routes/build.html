@@ -4,6 +4,8 @@
 		<Champion v-if="champion" champion-key="{{ champion.key }}" champion-width="96" champion-height="96"></Champion>
 		<Item v-repeat="itemId in build.items"></Item>
 		
+		<SummonerSpell summoner-spell-id="1"></SummonerSpell>
+		
 		<div class='skill-order' v-if="champion">
 			<div v-repeat="spell in champion.spells" class='skill'>
 				<div class='line'>
