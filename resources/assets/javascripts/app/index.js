@@ -1,3 +1,4 @@
+import Cookies from 'js-cookie'
 import Vue from 'vue'
 
 import template from './template.html'
@@ -49,6 +50,12 @@ export default Vue.extend({
 	},
 
 	ready: function () {
+		// Read XSRF token
+		var xsrfToken = Cookies.get('XSRF-TOKEN')
+		if(xsrfToken) {
+			this.$http.headers.custom['X-XSRF-TOKEN'] = decodeURI(xsrfToken)
+		}
+
 		// Load static data from server
 		this.$http.get(document.body.getAttribute('data-config')).success((configured) => {
 			this.$data.versions = configured.data.versions
@@ -57,7 +64,7 @@ export default Vue.extend({
 			this.$data.maps = keyBy(configured.data.maps.data, 'id')
 			this.$data.summonerSpells = keyBy(configured.data.summoner_spells.data, 'id')
 			this.$data.isLoading = false
-		});
 
+		});
 	},
 });

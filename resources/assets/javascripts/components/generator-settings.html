@@ -1,0 +1,24 @@
+<div class="generator-settings">
+	<div class="title">
+		<h2>Settings</h2>
+	</div>
+
+	<div class="section">
+		<h3>Map</h3>
+
+		<label v-repeat="map in maps">
+			<input type="radio" v-model="settings.map" value="{{map.id}}"/>
+			{{ map.name }}
+		</label>
+	</div>
+
+	<div class="section double">
+		<h3>Champions</h3>
+
+		<champion-select selected-champions="{{@ settings.champions}}"></champion-select>
+	</div>
+
+	<div class="section">
+		<h3>Options</h3>
+	</div>
+</div>

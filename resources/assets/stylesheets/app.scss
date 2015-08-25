@@ -2,11 +2,20 @@
 @import "vendor/bourbon";
 @import "vendor/base";
 
+$minimum-column: 150px;
+
+a {
+	cursor: pointer;
+}
+
 // Application structure
 @import "structure/container";
 @import "structure/header";
 @import "structure/content";
 @import "structure/footer";
+
+@import "components/generator-settings";
+@import "components/champion-select";
 
 .container {
 	width: 600px;

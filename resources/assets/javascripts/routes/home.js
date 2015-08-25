@@ -1,3 +1,4 @@
+import Cookies from 'js-cookie'
 import Vue from 'vue'
 
 import championComponent from '../components/champion'
@@ -14,9 +15,7 @@ export default Vue.extend({
 	},
 
 	ready: function () {
-		var value = "; " + document.cookie;
-		var parts = value.split("; kappa=");
-		this.isAgreed = parts.length == 2 ? (parts.pop().split(";").shift() == 'true') : false;
+		this.isAgreed = Cookies.get('kappa');
 	},
 	data: function () {
 		return {
@@ -35,7 +34,7 @@ export default Vue.extend({
 	methods: {
 		setAgreed: function (event) {
 			this.isAgreed = event.target.checked
-			document.cookie = "kappa=" + this.isAgreed;
+			Cookies.set('kappa', this.isAgreed);
 		},
 		toggleSettings: function (event) {
 			event.preventDefault();

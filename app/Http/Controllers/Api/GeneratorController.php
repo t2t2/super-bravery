@@ -2,6 +2,7 @@
 
 namespace t2t2\SuperBravery\Http\Controllers\Api;
 
+use Illuminate\Http\Request;
 use t2t2\SuperBravery\Http\Controllers\Controller;
 use t2t2\SuperBravery\Riot\StaticData;
 
@@ -22,12 +23,13 @@ class GeneratorController extends Controller {
 	/**
 	 * Roll a random result for the player
 	 */
-	public function roll() {
+	public function roll(Request $request) {
 		$champion = $this->rollChampion();
 
 
 		return response()->json([
-			'champion' => $champion,
+			'champion' => $champion['id'],
+			'request' => $request->all(),
 		]);
 	}
 

@@ -6,9 +6,9 @@ export function configRouter(router) {
 				require(['./routes/home'], resolve)
 			},
 		},
-		'/build': {
+		'/generator': {
 			component: function (resolve) {
-				require(['./routes/build'], resolve)
+				require(['./routes/generate'], resolve)
 			},
 		},
 		'/build/:payload': {

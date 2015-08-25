@@ -1,0 +1,10 @@
+<div class="champion-select">
+
+	<div class="champions">
+		<div class="champion" v-repeat="champion in champions | orderBy 'name'"
+		     v-class="inactive: !isSelected(champion.id)" v-attr="title: champion.name"
+		     v-on="click: toggleChampion(champion.id)">
+			<Champion champion-id="{{champion.id}}"></Champion>
+		</div>
+	</div>
+</div>

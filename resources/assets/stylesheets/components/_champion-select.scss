@@ -1,0 +1,26 @@
+.champion-select {
+
+	.champions {
+		display: flex;
+		flex-flow: row wrap;
+		justify-content: center;
+
+		.champion {
+			border: 1px solid #000;
+			cursor: pointer;
+			flex-basis: 32px;
+			margin: 1px;
+			
+
+			&.inactive {
+				opacity: 0.5;
+			}
+
+			& > img {
+				display: block;
+				height: auto;
+				width: 100%;
+			}
+		}
+	}
+}

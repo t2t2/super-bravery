@@ -1,0 +1,11 @@
+<div id="content">
+	<generator-settings settings="{{@ settings}}" v-if="showSettings" v-transition="expand"></generator-settings>
+	<div class="container error" v-if="message" v-text="message"></div>
+	<div class="container to-sides">
+		<a v-on="click: toggleSettings">{{ showSettings ? '- Hide' : '+ Show' }} settings</a>
+		<button v-on="click: rollBuild" v-attr="disabled: gettingBuild">Roll a new build</button>
+	</div>
+	<div class="container" v-if="build">
+		{{ build | json }}
+	</div>
+</div>
