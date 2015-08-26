@@ -1,0 +1,33 @@
+.tooltip-item {
+    display: inline-block;
+    position: relative;
+    text-align: center;
+  
+    &:hover + .tooltip {
+        opacity: 1;
+        visibility: visible;
+    }
+  
+    & + .tooltip {
+        position: absolute;
+        transition: all 0.2s ease-in-out;
+        background: #fff;
+        color: $base-font-color;
+        font-size: 0.9em;
+        line-height: 1.5em;
+        margin: 0 auto;
+        max-width: 16em;
+        opacity: 0;
+        padding: 1em;
+        text-align: center;
+        visibility: hidden;
+        z-index: 10;
+        border: 1px solid $light-gray;
+  
+        p {
+            color: $dark-gray;
+            line-height: 1.5em;
+            margin: 0;
+        }
+    }
+}
