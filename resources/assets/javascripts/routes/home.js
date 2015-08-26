@@ -57,7 +57,7 @@ export default Vue.extend({
 			
 			// Assumes you have all champions if you don't set any.
 			if (!this.settings.champions.length) {
-				this.settings.champions = this.$root.champions;
+				this.settings.champions = Object.keys(this.$root.champions).map(key => parseInt(key));
 			}
 			
 			// Ok to go
