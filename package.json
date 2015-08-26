@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "js-cookie": "^2.0.3",
-    "vue": "^0.12.10",
+    "vue": "^0.12.12",
     "vue-resource": "^0.1.13",
     "vue-router": "^0.5.1"
   },
