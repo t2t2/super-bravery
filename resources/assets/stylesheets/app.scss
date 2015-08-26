@@ -16,14 +16,15 @@ a {
 
 @import "components/generator-settings";
 @import "components/champion-select";
+@import "components/build";
 
 .container {
-	width: 600px;
+	width: 510px;
 	margin-left: auto;
 	margin-right: auto;
 }
 
-section {
+section.info {
 	border-bottom: 1px solid $light-gray;
 	border-left: 2px solid $light-gray;
 	border-bottom-left-radius: 3px;
@@ -49,6 +50,7 @@ button {
 	user-select: none;
 	vertical-align: middle;
 	white-space: nowrap;
+	outline: none;
 
 	&:hover, &:focus {
 		border-color: shade($action-color, 20%);
@@ -114,11 +116,6 @@ button {
 	}    
 }
 
-#settings {
-	display: block;
-	margin-top: 10px;
-}
-
 .expand-transition {
 	transition: all .3s ease;
 }
@@ -128,6 +125,7 @@ button {
 	opacity: 0;
 }
 
+/*
 .skill-order {
 	display: block;
 	width: 100%;
@@ -151,4 +149,4 @@ button {
 			}
 		}
 	}
-}
+}*/

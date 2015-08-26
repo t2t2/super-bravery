@@ -1,0 +1,31 @@
+.build {
+	display: flex;
+	flex-flow: row wrap;
+	margin-top: 20px;
+	
+	.champion {
+		flex: 0 auto;
+	}
+	
+	.build-name {
+		flex: 1 auto;
+		padding: 0 5px 0 10px;
+		
+		.title {
+			font-size: 48px;
+			font-weight: bold;
+			color: $dark-gray;
+  			text-shadow: 0 1px 0 lighten($dark-gray, 30%),
+		}
+		
+		.subtitle {
+			font-size: 24px;
+			font-weight: bold;
+			color: lighten($dark-gray, 5%);
+		}
+	}
+	
+	.build-contents {
+		flex: 1 100%;
+	}
+}

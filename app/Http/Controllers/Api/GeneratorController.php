@@ -28,7 +28,10 @@ class GeneratorController extends Controller {
 
 
 		return response()->json([
+			'name' => 'x9',
 			'champion' => $champion['id'],
+			'items' => [1036, 1038, 1339, 3196, 1337, 1332],
+			'summoners' => [4, 7],
 			'request' => $request->all(),
 		]);
 	}

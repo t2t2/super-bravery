@@ -1,4 +1,4 @@
-
+/*
 .generator-settings {
 	display: flex;
 	flex-flow: row wrap;
@@ -16,5 +16,30 @@
 			flex-basis: $minimum-column * 2;
 			min-width: $minimum-column * 2;
 		}
+	}
+}
+*/
+
+.generator-settings {
+	margin-top: 10px;
+	
+	input[type=radio] {
+		display: none;
+		
+		& + label {
+			display: inline-block;
+			padding: 0 10px;
+			margin: 0 5px;
+			border: 1px solid $light-gray;
+			cursor: pointer;
+		}
+		
+		&:checked + label {
+			border-color: $action-color;
+		}
+	}
+	
+	#map-selection {
+		margin-bottom: 10px;
 	}
 }

@@ -1,21 +1,5 @@
 <div id="content">
 	<div class='container'>
-		<h1>{{ build.name | uppercase }}</h1>
-		<Champion v-if="champion" champion-id="{{ champion.id }}" width="96" height="96"></Champion>
-		<Item v-repeat="itemId in build.items"></Item>
-		
-		<summoner-spell summoner-spell-id="1"></summoner-spell>
-		
-		<div class='skill-order' v-if="champion">
-			<div v-repeat="spell in champion.spells" class='skill'>
-				<div class='line'>
-					<!-- TODO: Skill icons which you can hover for details -->
-					<div v-repeat="choice in build.skillOrder[$index]" class="entry {{ choice ? 'choice' : 'empty'}}">
-						{{ $index + 1 }}
-					</div>
-				</div>
-			</div>
-		</div>
 		
 	</div>
 </div>

@@ -1,62 +1,65 @@
 <div id="content">
 	<div class="container">
-		<section>
-			<h2>What is this?</h2>
-			<p>
-				Super Ultimate Bravery is a challenge based on 
-				<a href="http://www.ultimate-bravery.com/">Ultimate Bravery</a> 
-				where you are given a random champion, skill order and item build which 
-				you must follow.
-			</p>
-		</section>
-		
-		<section>
-			<h2>How does it work?</h2>
-			<p>
-				You just click the button below. If you need to specify what champions you 
-				own or what map you want to play on you can click on the settings link below.
-			</p>
-			<p>
-				You can use the channel 'Ultimate Bravery' on the league client to find people
-				to play with. We highly suggest having a pre-made group of five.a
-			</p>
-		</section>
-		
-		<section v-if="!isAgreed">
-			<h2>Please remember...</h2>
-			<p>
-				If you are not in a pre-made group of five that you are playing with other
-				people and they might not like that you are following the build/item paths
-				provided here. We cannot be responsable for getting your account banned for 
-				'trolling'. We highly suggest playing in a group. You can use the channel
-				'Ultimate Bravery' on the league client to find people to play with.
-			</p>
-			<i>I have read and understand</i>
-			<span v-on="click: setAgreed($event)" class="checkbox">
-				<input type="checkbox" id="checkbox" name="check" />
-				<label for="checkbox"></label>
-			</span>
-		</section>
-		
-		<button class="block" disabled="{{!isAgreed}}">one in ten are brave enough to click.</button>
-		
-		<small>
-			<a href="#" v-on="click: toggleSettings($event)">
-				{{ showSettings ? '-' : '+' }} settings
-			</a>
-		</small>
-		
-		<div id="settings" v-if="showSettings" v-transition="expand">
-			<h3>Settings</h3>
+		<div v-if="!build">
+			<section class="info">
+				<h2>What is this?</h2>
+				<p>
+					Super Ultimate Bravery is a challenge based on 
+					<a href="http://www.ultimate-bravery.com/">Ultimate Bravery</a> 
+					where you are given a random champion, skill order and item build which 
+					you must follow.
+				</p>
+			</section>
 			
-			<span v-repeat="maps | orderBy 'key'">
-				<input type="radio" id="map-{{key}}" name="map-{{key}}" />
-				<label for="map-{{key}}">{{key}}</label>
-			</span>
+			<section class="info">
+				<h2>How does it work?</h2>
+				<p>
+					You just click the button below. If you need to specify what champions you 
+					own or what map you want to play on you can click on the settings link below.
+				</p>
+				<p>
+					You can use the channel 'Ultimate Bravery' on the league client to find people
+					to play with. We highly suggest having a pre-made group of five.
+				</p>
+			</section>
 			
-			<span v-repeat="champions | orderBy 'key'">
-				<Champion champion-id="{{id}}"></Champion>
-			</span>
+			<section class="info" v-if="!isAgreed">
+				<h2>Please remember...</h2>
+				<p>
+					If you are not in a pre-made group of five that you are playing with other
+					people and they might not like that you are following the build/item paths
+					provided here. We cannot be responsable for getting your account banned for 
+					'trolling'. We highly suggest playing in a group. You can use the channel
+					'Ultimate Bravery' on the league client to find people to play with.
+				</p>
+				<i>I have read and understand</i>
+				<span v-on="click: setAgreed($event)" class="checkbox">
+					<input type="checkbox" id="checkbox" name="check" />
+					<label for="checkbox"></label>
+				</span>
+			</section>
+		</div>
+		
+		<div class="container error" v-if="message" v-text="message"></div>
+		<button class="block" v-on="click: rollBuild" v-attr="disabled: gettingBuild || !isAgreed">
+			{{ !build ? 'one in ten are brave enough to click.' : 'too scared to try this build? click here to roll a new one.' }}
+		</button>
+		
+		<a v-on="click: toggleSettings">{{ showSettings ? '- Hide' : '+ Show' }} settings</a>
+		<generator-settings settings="{{@ settings}}" v-if="showSettings" v-transition="expand"></generator-settings>
+		
+		<div class="build" v-if="build">
+			<div class="champion">
+				<Champion champion-id="{{ build.champion }}" width="128" height="128"></Champion>
+			</div>
+			<div class="build-name">
+				<div class="title">{{ build.name | uppercase }}</div>
+				<div class="subtitle">{{ championName(build.champion) | uppercase }}</div>
+			</div>
+			<div class="build-contents">
+				<Item v-repeat="itemId in build.items"></Item>
+				<summoner-spell v-repeat="summonerSpellId in build.summoners"></summoner-spell>
+			</div>
 		</div>
 		
 	</div>
