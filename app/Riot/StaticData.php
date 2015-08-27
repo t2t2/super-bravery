@@ -108,7 +108,7 @@ class StaticData {
 		$items = $this->cache->remember($key, self::$dataCache, function () use ($version) {
 			$response = $this->getClient()->staticRequest($this->region, 'item', null, [
 				'version'      => $version,
-				'itemListData' => 'requiredChampion,gold,stats,image',
+				'itemListData' => 'all',
 			]);
 			$items_data = json_decode($response->getBody(), true);
 

@@ -68,7 +68,11 @@ export default Vue.extend({
 				this.build = data
 				this.gettingBuild = false
 			}).error((data) => {
-				this.message = data
+				if(typeof data == 'object') {
+					this.message = data
+				} else {
+					this.message = { error: data };
+				}
 				this.gettingBuild = false
 			})
 		},

@@ -37,7 +37,3 @@ $app->group(['namespace' => 't2t2\SuperBravery\Http\Controllers'], function (App
 		$app->get($path, ['uses' => 'FrontendController@serve']);
 	}
 });
-
-$app->get('/test', function (\t2t2\SuperBravery\Riot\StaticData $static) {
-	dump($static->summonerSpells());
-});
