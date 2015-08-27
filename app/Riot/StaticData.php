@@ -86,6 +86,7 @@ class StaticData {
 			$response = $this->getClient()->staticRequest($this->region, 'champion', null, [
 				'version'   => $version,
 				'champData' => 'image,spells',
+				'dataById'  => 'true',
 			]);
 			$champions_data = json_decode($response->getBody(), true);
 
@@ -172,6 +173,7 @@ class StaticData {
 		$maps = $this->cache->remember($key, self::$dataCache, function () use ($version) {
 			$response = $this->getClient()->staticRequest($this->region, 'summoner-spell', null, [
 				'version'   => $version,
+				'dataById'  => 'true',
 				'spellData' => 'modes,image',
 			]);
 			$items_data = json_decode($response->getBody(), true);

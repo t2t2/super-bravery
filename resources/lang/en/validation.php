@@ -74,6 +74,14 @@ return [
     'url'                  => 'The :attribute format is invalid.',
     'timezone'             => 'The :attribute must be a valid zone.',
 
+	/*
+	 * Custom validation strings
+	 */
+
+	'map'            => 'The :attribute must be a valid map.',
+	'champion'       => 'The :attribute must be a valid champion.',
+	'champion_array' => 'The :attribute must be a valid list of champions.',
+
     /*
     |--------------------------------------------------------------------------
     | Custom Validation Language Lines

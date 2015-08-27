@@ -40,7 +40,7 @@
 			</section>
 		</div>
 		
-		<div class="container error" v-if="message" v-text="message"></div>
+		<div class="container error" v-repeat="line in message" v-text="line"></div>
 		<button class="block" v-on="click: rollBuild" v-attr="disabled: gettingBuild || !isAgreed">
 			{{ !build ? 'one in ten are brave enough to click.' : 'too scared to try this build? click here to roll a new one.' }}
 		</button>

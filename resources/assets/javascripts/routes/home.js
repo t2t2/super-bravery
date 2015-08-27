@@ -48,7 +48,7 @@ export default Vue.extend({
 			Cookies.set('kappa', this.isAgreed);
 		},
 		rollBuild: function () {
-			this.message = ''
+			this.message = null;
 			
 			// Summoners rift default if no map was set.
 			if (!this.settings.map) {
@@ -69,6 +69,7 @@ export default Vue.extend({
 				this.gettingBuild = false
 			}).error((data) => {
 				this.message = data
+				this.gettingBuild = false
 			})
 		},
 		toggleSettings: function () {

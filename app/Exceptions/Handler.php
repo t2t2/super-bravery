@@ -6,39 +6,47 @@ use Exception;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Laravel\Lumen\Exceptions\Handler as ExceptionHandler;
 
-class Handler extends ExceptionHandler
-{
-    /**
-     * A list of the exception types that should not be reported.
-     *
-     * @var array
-     */
-    protected $dontReport = [
-        HttpException::class,
-    ];
+class Handler extends ExceptionHandler {
 
-    /**
-     * Report or log an exception.
-     *
-     * This is a great spot to send exceptions to Sentry, Bugsnag, etc.
-     *
-     * @param  \Exception  $e
-     * @return void
-     */
-    public function report(Exception $e)
-    {
-        return parent::report($e);
-    }
+	/**
+	 * A list of the exception types that should not be reported.
+	 *
+	 * @var array
+	 */
+	protected $dontReport = [
+		HttpException::class,
+	];
 
-    /**
-     * Render an exception into an HTTP response.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Exception  $e
-     * @return \Illuminate\Http\Response
-     */
-    public function render($request, Exception $e)
-    {
-        return parent::render($request, $e);
-    }
+	/**
+	 * Report or log an exception.
+	 * This is a great spot to send exceptions to Sentry, Bugsnag, etc.
+	 *
+	 * @param  \Exception $e
+	 *
+	 * @return void
+	 */
+	public function report(Exception $e) {
+		return parent::report($e);
+	}
+
+	/**
+	 * Render an exception into an HTTP response.
+	 *
+	 * @param  \Illuminate\Http\Request $request
+	 * @param  \Exception               $e
+	 *
+	 * @return \Illuminate\Http\Response
+	 */
+	public function render($request, Exception $e) {
+		if ($request->wantsJson()) {
+			if (env('APP_DEBUG', false)) {
+				return response()->json(['error' => 'Server Error: ' . $e->getMessage() . '(' . $e->getFile() . $e->getLine() . ')'],
+					500);
+			} else {
+				return response()->json(['error' => 'Whoops, looks like something went wrong.'], 500);
+			}
+		}
+
+		return parent::render($request, $e);
+	}
 }

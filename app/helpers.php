@@ -4,8 +4,7 @@ if (!function_exists('asset')) {
 	/**
 	 * Generate a URL to a asset.
 	 *
-	 * @param  string $name
-	 * @param  array  $parameters
+	 * @param string $path
 	 *
 	 * @return string
 	 */
