@@ -76,11 +76,11 @@ class BuildGenerator {
 			'champion'  => $this->champion['id'],
 			'items'     => $this->items->map(function($item) {
 				return $item['id'];
-			}),
+			})->values(),
 			'map'       => $this->map['MapId'],
 			'summoners' => $this->summoners->map(function ($spell) {
 				return $spell['id'];
-			}),
+			})->values(),
 		];
 
 	}
