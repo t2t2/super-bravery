@@ -5,7 +5,7 @@
   
     &:hover > .tooltip {
         opacity: 1;
-        visibility: visible;
+	    display: block;
     }
   
     & > .tooltip {
@@ -20,7 +20,7 @@
         opacity: 0;
         padding: 1em;
         text-align: center;
-        visibility: hidden;
+        display: none;
         z-index: 10;
         border: 1px solid $light-gray;
   

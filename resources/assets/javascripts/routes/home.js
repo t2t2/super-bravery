@@ -63,6 +63,7 @@ export default Vue.extend({
 			// Ok to go
 			this.gettingBuild = true
 			this.showSettings = false
+			this.build = false
 
 			this.$root.$http.post('/api/roll', this.settings).success((data) => {
 				this.build = data

@@ -74,7 +74,7 @@ class BuildGenerator {
 		return [
 			'name'      => 'x9',
 			'champion'  => $this->champion['id'],
-			'items'     => $this->items->map(function($item) {
+			'items'     => $this->items->map(function ($item) {
 				return $item['id'];
 			})->values(),
 			'map'       => $this->map['MapId'],
@@ -138,32 +138,82 @@ class BuildGenerator {
 	 * @return Collection
 	 */
 	protected function chooseItems() {
-		$items = $this->getGroupedItemsForMap();
+		$all_items = $this->getGroupedItemsForMap();
 
-		return new Collection([
-			$this->chooseBoots($items),
-			$this->chooseBoots($items),
-			$this->chooseBoots($items),
-			$this->chooseBoots($items),
-			$this->chooseBoots($items),
-			$this->chooseBoots($items),
-		]);
-		/*
-		$boots = $this->chooseBoots($items);
+		$boots = $this->chooseBoots($all_items);
 
-		*/
+		$items = new Collection();
+
+		// If has smite
+		if ($this->summoners->offsetExists(11)) {
+			$items->push($this->chooseSmiteItem($all_items));
+		}
+
+		// If champion must have an item
+		$must_own = $this->config->get('generator.must_own');
+		if (array_key_exists($this->champion['id'], $must_own)) {
+			$items_database = $this->static->items();
+
+			foreach ($must_own[$this->champion['id']] as $item_id) {
+				$items->push($items_database[$item_id]);
+			}
+		}
+
+		// Fill remaining slots
+		$count = 5 - $items->count();
+
+		$items = $items->merge($this->chooseRandomItems($all_items, $count));
+
+		// Shuffle again so prereq items get randomised
+		/** @var Collection $items */
+		$items = $items->shuffle();
+
+		$items->prepend($boots);
+
+		return $items;
 	}
 
 
 	/**
 	 * Choose random boots to wear
 	 *
-	 * @param Collection $items
+	 * @param Collection $all_items
 	 *
 	 * @return array
 	 */
-	protected function chooseBoots(Collection $items) {
-		return $items['Boots']->random();
+	protected function chooseBoots(Collection $all_items) {
+		return $all_items['Boots']->random();
+	}
+
+	/**
+	 * Choose random jungle item
+	 *
+	 * @param Collection $all_items
+	 *
+	 * @return array
+	 */
+	protected function chooseSmiteItem(Collection $all_items) {
+		return $all_items['JungleItems']->random();
+	}
+
+	/**
+	 * Choose random items for the player
+	 *
+	 * @param Collection $all_items
+	 * @param int        $count
+	 *
+	 * @return Collection|array[]
+	 */
+	protected function chooseRandomItems(Collection $all_items, $count) {
+		do {
+			/** @var Collection $items */
+			$items = $all_items['Finished']->random($count);
+			// Make sure there isn't more than 2 GoldBase items
+			$valid = $items->filter(function ($item) {
+			    return isset($item['group']) && $item['group'] == 'GoldBase';
+			})->count() < 2;
+		} while(!$valid);
+		return $items;
 	}
 
 	/**
@@ -197,16 +247,18 @@ class BuildGenerator {
 			}
 
 			// Remove items that aren't the last
-			if (isset($item['into']) && count($item['into'])) {
+			if ((isset($item['into']) && count($item['into'])) || (!isset($item['from']) || !count($item['from']))) {
 				return false;
 			}
 
 			// Remove enchanted boots that are raw boots (wtf?)
+			/* Removed by $item['from'] above
 			if (isset($item['group']) && starts_with($item['group'], 'Boots') &&
 				(!isset($item['from']) || !count($item['from']))
 			) {
 				return false;
 			}
+			*/
 
 			// Remove items that are for specific champions. If they take a slot they're added in set generation step
 			if (isset($item['requiredChampion']) && $item['requiredChampion']) {
