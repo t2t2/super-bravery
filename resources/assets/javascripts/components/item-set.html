@@ -1,0 +1,13 @@
+<div class="item-set-container">
+	<div class="item-set to-sides">
+		<div class="title">
+			<h3>Download In-Game Item Set</h3>
+			<a class="help-link" v-on="click: toggleHelp">{{ showHelp ? 'Hide' : 'Show' }} Help</a>
+		</div>
+		<a class="button" v-attr="href: itemSetURL" download="SuperUltimateBraverySet.json">Download</a>
+	</div>
+	<div class="help" v-show="showHelp">
+		<h4>Usage Instructions</h4>
+		<pre>{{ itemSet | json }}</pre>
+	</div>
+</div>

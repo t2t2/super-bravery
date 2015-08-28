@@ -1,0 +1,25 @@
+.item-set-container {
+	width: 100%;
+
+	.item-set {
+		border: 2px solid $action-color;
+		.title {
+			display: flex;
+			flex-direction: column;
+			padding: 5px;
+			h3 {
+				margin-bottom: 0.2em;
+			}
+			.help-link {
+				font-size: 0.6em;
+			}
+		}
+		.button {
+			margin: -2px;
+		}
+	}
+
+	.help {
+		margin-top: 1em;
+	}
+}

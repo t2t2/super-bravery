@@ -24,6 +24,7 @@ class MetaTransformer extends TransformerAbstract {
 	 */
 	public function transform(MetaState $state) {
 		return [
+			'map_to_mode' => $state->mapToModeMappings(),
 			'versions' => $state->static->version(),
 		];
 	}

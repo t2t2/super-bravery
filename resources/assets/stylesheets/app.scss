@@ -18,6 +18,7 @@ a {
 @import "components/champion-select";
 @import "components/build";
 @import "components/tooltip";
+@import "components/item-set";
 
 .container {
 	width: 510px;
@@ -33,7 +34,7 @@ section.info {
 	margin: 20px 0;
 }
 
-button {
+button, .button {
 	appearance: none;
 	background-color: transparent;
   	border: 2px solid $action-color;

@@ -18,22 +18,23 @@ export default Vue.extend({
 	data: function () {
 		return {
 			versions:       {
-				cdn: 'http://ddragon.leagueoflegends.com/cdn',
-				item: defaultVersion,
-				rune: defaultVersion,
-				mastery: defaultVersion,
-				summoner: defaultVersion,
-				champion: defaultVersion,
+				cdn:         'http://ddragon.leagueoflegends.com/cdn',
+				item:        defaultVersion,
+				rune:        defaultVersion,
+				mastery:     defaultVersion,
+				summoner:    defaultVersion,
+				champion:    defaultVersion,
 				profileicon: defaultVersion,
-				map: defaultVersion,
-				language: defaultVersion,
-				meta: defaultVersion,
+				map:         defaultVersion,
+				language:    defaultVersion,
+				meta:        defaultVersion,
 			},
+			map_to_mode:    {},
 			champions:      {},
 			items:          {},
 			maps:           {},
 			summonerSpells: {},
-			isLoading: true,
+			isLoading:      true,
 		}
 	},
 
@@ -42,7 +43,7 @@ export default Vue.extend({
 			var folder = type;
 
 			// remap
-			if(type == 'summoner') {
+			if (type == 'summoner') {
 				folder = 'spell'
 			}
 
@@ -59,13 +60,14 @@ export default Vue.extend({
 	ready: function () {
 		// Read XSRF token
 		var xsrfToken = Cookies.get('XSRF-TOKEN')
-		if(xsrfToken) {
+		if (xsrfToken) {
 			this.$http.headers.custom['X-XSRF-TOKEN'] = decodeURI(xsrfToken)
 		}
 
 		// Load static data from server
 		this.$http.get(document.body.getAttribute('data-config')).success((configured) => {
 			this.$data.versions = configured.data.versions
+			this.$data.map_to_mode = configured.data.map_to_mode
 			this.$data.champions = keyBy(configured.data.champions.data, 'id')
 			this.$data.items = keyBy(configured.data.items.data, 'id')
 			this.$data.maps = keyBy(configured.data.maps.data, 'id')

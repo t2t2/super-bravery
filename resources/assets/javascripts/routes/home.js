@@ -3,6 +3,7 @@ import Vue from 'vue'
 
 import champion from '../components/champion'
 import item from '../components/item'
+import itemSet from '../components/item-set'
 import summonerSpell from '../components/summonerSpell'
 import generatorSettings from '../components/generator-settings'
 
@@ -12,9 +13,10 @@ export default Vue.extend({
 	template,
 
 	components: {
-		generatorSettings,
 		champion,
+		generatorSettings,
 		item,
+		itemSet,
 		summonerSpell
 	},
 
