@@ -30,7 +30,6 @@ $app->group(['namespace' => 't2t2\SuperBravery\Http\Controllers'], function (App
 
 	$frontendPaths = [
 		'/build/{build}',
-		'/generator',
 	];
 
 	foreach($frontendPaths as $path) {
