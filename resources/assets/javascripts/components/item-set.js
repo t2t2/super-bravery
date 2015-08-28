@@ -41,7 +41,7 @@ function getItemTree(itemID) {
 
 	if (itemID in this.$root.items && this.$root.items[itemID].from) {
 		items = this.$root.items[itemID].from.reduce((items, itemID) => {
-			items.push(itemID)
+			items.push.apply(items, getItemTree.call(this, itemID))
 			return items
 		}, items);
 	}
