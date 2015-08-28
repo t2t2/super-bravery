@@ -21,5 +21,9 @@
 
 	.help {
 		margin-top: 1em;
+
+		ol {
+			@extend %default-ol;
+		}
 	}
 }

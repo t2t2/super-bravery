@@ -27,6 +27,10 @@ function blocksGenerator(items) {
 		}
 	});
 
+	/*
+	 * Space for any extra blocks to be added
+	 */
+
 	return blocks;
 }
 
@@ -72,11 +76,36 @@ export default Vue.extend({
 			// http://stackoverflow.com/a/18197511
 			return window.URL.createObjectURL(new Blob([JSON.stringify(this.itemSet)], {type: 'application/json'}));
 		},
+
+		itemSetPaths: function () {
+			var champKey = ''
+			if (this.build && this.build.champion) {
+				champKey = this.$root.champions[this.build.champion].key
+			}
+
+			return [
+				[this.leaguePath, 'Config', 'Global', 'Recommended'].join(this.dirSep) + this.dirSep,
+				[this.leaguePath, 'Config', 'Champions', champKey, 'Recommended'].join(this.dirSep) + this.dirSep,
+			];
+		}
 	},
 
 	data: function () {
+		var leaguePath = 'Path to League of Legends';
+		var dirSep = '/'
+
+		// The only time where checking navigator.appVersion is a legit way to detect capabilities
+		if (navigator.appVersion.indexOf("Win") != -1) {
+			leaguePath = 'C:\\Riot Games\\League of Legends'
+			dirSep = '\\'
+		} else if (navigator.appVersion.indexOf("Mac") != -1) {
+			leaguePath = 'League of Legends.app/Contents/LoL'
+		}
+
 		return {
-			showHelp: true,
+			          dirSep,
+			          leaguePath,
+			showHelp: false
 		}
 	},
 

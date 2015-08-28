@@ -1,5 +1,5 @@
 <div class="item-set-container">
-	<div class="item-set to-sides">
+	<div class="item-set to-sides" v-if="build">
 		<div class="title">
 			<h3>Download In-Game Item Set</h3>
 			<a class="help-link" v-on="click: toggleHelp">{{ showHelp ? 'Hide' : 'Show' }} Help</a>
@@ -8,6 +8,17 @@
 	</div>
 	<div class="help" v-show="showHelp">
 		<h4>Usage Instructions</h4>
-		<pre>{{ itemSet | json }}</pre>
+
+		<p>Click the download button and save the file to either:</p>
+		<ul>
+			<li v-repeat="path in itemSetPaths" v-text="path"></li>
+		</ul>
+		<p>Actual path may vary depending on your installation settings.</p>
+
+		<p><strong>Tip:</strong> We recommend saving it in global sets so you can easily find it to delete it later or
+			replace with next build when playing again.</p>
+
+		<p><strong>Tip:</strong> In most browsers you can right cick the button and save as directly into the folder.
+		</p>
 	</div>
 </div>
