@@ -9,10 +9,22 @@
 			cursor: pointer;
 			flex-basis: 32px;
 			margin: 1px;
+			position: relative;
 			
 
 			&.inactive {
 				opacity: 0.5;
+				
+				&:after {
+					content: "\2717";
+					font-size: 32px;
+					width: 9px;
+					height: 5px;
+					position: absolute;
+					top: -10px;
+					left: 3px;
+					color: crimson;
+				}
 			}
 
 			& > img {

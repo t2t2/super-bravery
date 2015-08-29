@@ -54,7 +54,7 @@ export default Vue.extend({
 				folder,
 				file
 			].join('/');
-		},
+		}
 	},
 
 	ready: function () {
