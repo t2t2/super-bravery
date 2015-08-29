@@ -1,4 +1,5 @@
 import Cookies from 'js-cookie'
+import Base64 from 'js-base64'
 import Vue from 'vue'
 
 import champion from '../components/champion'
@@ -43,7 +44,8 @@ export default Vue.extend({
 				data.push(this.build[o]);
 			}
 			
-			return [].concat.apply([], data).join(':');
+			var hash = Base64.Base64.encodeURI([].concat.apply([], data).join(':'));
+			return 'http://super-bravery.app/build/' + hash;
 		}
 	},
 	methods: {

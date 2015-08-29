@@ -1,5 +1,17 @@
 <div id="content">
 	<div class='container'>
-		
+		<div class="build">
+			<div class="champion">
+				<Champion champion-id="{{ build.champion }}" width="128" height="128"></Champion>
+			</div>
+			<div class="build-name">
+				<div class="title">{{ build.name | uppercase }}</div>
+				<div class="subtitle">{{ championName(build.champion) | uppercase }}</div>
+			</div>
+			<div class="build-contents">
+				<Item v-repeat="itemId in build.items"></Item>
+				<summoner-spell v-repeat="summonerSpellId in build.summoners"></summoner-spell>
+			</div>
+		</div>
 	</div>
 </div>
