@@ -37,11 +37,13 @@ export default Vue.extend({
 		}
 	},
 	computed: {
-		champions: function () {
-			return this.$root.champions
-		},
-		items: function () {
-			return this.$root.items
+		buildUrl: function () {
+			var data = new Array;
+			for (var o in this.build) {
+				data.push(this.build[o]);
+			}
+			
+			return [].concat.apply([], data).join(':');
 		}
 	},
 	methods: {

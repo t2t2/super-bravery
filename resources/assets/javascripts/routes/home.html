@@ -45,7 +45,7 @@
 			{{ !build ? 'one in ten are brave enough to click.' : 'too scared to try this build? click here to roll a new one.' }}
 		</button>
 		
-		<a v-on="click: toggleSettings">{{ showSettings ? '- Hide' : '+ Show' }} settings</a>
+		<a class="settings" v-on="click: toggleSettings">{{ showSettings ? '- Hide' : '+ Show' }} settings</a>
 		<generator-settings settings="{{@ settings}}" v-if="showSettings" v-transition="expand"></generator-settings>
 		
 		<div class="build" v-if="build">
@@ -60,7 +60,14 @@
 				<Item v-repeat="itemId in build.items"></Item>
 				<summoner-spell v-repeat="summonerSpellId in build.summoners"></summoner-spell>
 			</div>
+			
 			<item-set build="{{build}}"></item-set>
+			
+			<div class="build-links">
+				<input type="text" value="{{ buildUrl }}" onclick="this.select();" readonly />
+				<input type="text" onclick="this.select();" readonly />
+			</div>
+			
 		</div>
 		
 	</div>
