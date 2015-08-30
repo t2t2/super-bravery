@@ -31,4 +31,9 @@ return [
 			3198
 		]
 	],
+
+	/**
+	 * Maximum index for build names
+	 */
+	'build_name_max' => 1,
 ];

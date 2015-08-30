@@ -5,6 +5,7 @@ gulp.task('clean', function (cb) {
 		config = require('../config');
 
 	del([
-		config.publicAssets
+		config.publicAssets,
+		config.publicDirectory + '/rev-manifest.json',
 	], cb);
 });

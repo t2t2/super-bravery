@@ -70,7 +70,7 @@ class BuildGenerator {
 		$this->chooseChampion($build);
 		$this->chooseSummoners($build);
 		$this->chooseItems($build);
-		$build->name = 0;
+		$build->name = mt_rand(0, $this->config->get('generator.build_name_max'));
 		$build->code = $this->generateBuildCode($build);
 
 		return $build;

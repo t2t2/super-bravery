@@ -4,15 +4,17 @@
 	margin-top: 20px;
 	
 	.champion {
-		flex: 0 auto;
+		flex: 0 128px;
 	}
 	
 	.build-name {
 		flex: 1 auto;
+		max-width: (510px - 128px);
 		padding: 0 5px 0 10px;
 		
 		.title {
 			font-size: 48px;
+			line-height: 1.2;
 			font-weight: bold;
 			color: $dark-gray;
   			text-shadow: 0 1px 0 lighten($dark-gray, 30%),
