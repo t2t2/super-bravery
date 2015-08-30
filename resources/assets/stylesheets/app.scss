@@ -35,11 +35,11 @@ section.info {
 }
 
 .settings {
-	position: relative;
-	top: -1px;
+	display: block;
+	margin-top: -1px;
 	background-color: $action-color;
 	color: white;
-	padding: 2px;
+	padding: 2px 4px;
 	
 	&:hover {
 		color: white;
