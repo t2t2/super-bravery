@@ -21,8 +21,9 @@ class FrontendController extends Controller {
 	}
 
 	/**
-	 * @param Manager   $manager
-	 * @param MetaState $metaState
+	 * Generate config for the frontend
+	 *
+	 * @param CacheRepository $cache
 	 *
 	 * @return \Symfony\Component\HttpFoundation\Response
 	 */
