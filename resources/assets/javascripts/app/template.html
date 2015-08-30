@@ -3,7 +3,13 @@
 		<a v-link="/">Super Ultimate Bravery</a>
 	</header>
 
-	<router-view></router-view>
+	<div id="content" v-if="isLoading">
+		<div class="container">
+			<h2>Loading latest data...</h2>
+		</div>
+	</div>
+
+	<router-view v-if="!isLoading"></router-view>
 
 	<footer id="footer">
 		<div class="container">

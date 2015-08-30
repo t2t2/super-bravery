@@ -31,6 +31,22 @@ var router = new VueRouter({
 
 configRouter(router)
 
+// Delay (initial) page switching until base app config is loaded
+
+router.beforeEach(function ({ next }) {
+	if(router.app.isLoading) {
+		// Waiting for loading data in app
+		var unwatch = router.app.$watch('isLoading', function (newState) {
+			if(!newState) {
+				unwatch()
+				Vue.nextTick(next);
+			}
+		})
+	} else {
+		next()
+	}
+})
+
 // Start router with app
 import App from './app/index'
 
