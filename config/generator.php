@@ -35,5 +35,5 @@ return [
 	/**
 	 * Maximum index for build names
 	 */
-	'build_name_max' => 1,
+	'build_name_max' => 12,
 ];
