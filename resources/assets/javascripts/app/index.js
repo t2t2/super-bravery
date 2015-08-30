@@ -1,4 +1,3 @@
-import Cookies from 'js-cookie'
 import Vue from 'vue'
 
 import template from './template.html'
@@ -60,12 +59,6 @@ export default Vue.extend({
 
 	ready: function () {
 		this.baseURL = document.body.getAttribute('data-base')
-
-		// Read XSRF token
-		var xsrfToken = Cookies.get('XSRF-TOKEN')
-		if (xsrfToken) {
-			this.$http.headers.custom['X-XSRF-TOKEN'] = decodeURI(xsrfToken)
-		}
 
 		// Load static data from server
 		this.$http.get(document.body.getAttribute('data-config')).success((configured) => {

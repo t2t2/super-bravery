@@ -35,7 +35,7 @@ export default Vue.extend({
 		data: function (transition) {
 			var code = transition.to.params.payload;
 
-			return this.$root.$http.get('/api/build/' + code).success((response) => {
+			return this.$http.get('/api/build/' + code).success((response) => {
 				return {
 					build: response.data,
 				};

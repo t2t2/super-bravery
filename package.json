@@ -5,8 +5,8 @@
   "dependencies": {
     "js-cookie": "^2.0.3",
     "vue": "^0.12.12",
-    "vue-resource": "^0.1.13",
-    "vue-router": "^0.5.1"
+    "vue-resource": "^0.1.15",
+    "vue-router": "^0.5.2"
   },
   "devDependencies": {
     "babel-core": "^5.8.22",

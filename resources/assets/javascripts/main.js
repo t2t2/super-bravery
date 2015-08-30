@@ -12,6 +12,15 @@ if(process.env.NODE_ENV !== 'production') {
 	Vue.config.debug = true
 }
 
+// Configure vue-resources
+Vue.http.options.root = document.body.getAttribute('data-base');
+// Read XSRF token
+import Cookies from 'js-cookie'
+var xsrfToken = Cookies.get('XSRF-TOKEN')
+if (xsrfToken) {
+	Vue.http.headers.common['X-XSRF-TOKEN'] = decodeURI(xsrfToken)
+}
+
 // Create router
 import { configRouter } from './routes'
 

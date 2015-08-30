@@ -79,7 +79,7 @@ export default Vue.extend({
 			this.showSettings = false
 			this.build = null
 
-			this.$root.$http.post('/api/roll', this.settings).success((response) => {
+			this.$http.post('/api/roll', this.settings).success((response) => {
 				this.build = response.data
 				this.gettingBuild = false
 			}).error((data) => {
