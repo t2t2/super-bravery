@@ -43,6 +43,17 @@ export default Vue.extend({
 			} else {
 				return '';
 			}
+		},
+		buildSummary: function () {
+			return this.championName(this.build.champion) 
+			+ ' - ' + this.itemName(this.build.items[0])
+			+ ', ' + this.itemName(this.build.items[1])
+			+ ', ' + this.itemName(this.build.items[2])
+			+ ', ' + this.itemName(this.build.items[3])
+			+ ', ' + this.itemName(this.build.items[4])
+			+ ', ' + this.itemName(this.build.items[5])
+			+ ' - ' + this.summonerName(this.build.summoners[0])
+			+ ', ' + this.summonerName(this.build.summoners[1]);
 		}
 	},
 	methods: {
@@ -86,6 +97,14 @@ export default Vue.extend({
 		championName: function (id) {
 			var champion = this.$root.champions[id];
 			return champion ? champion.name : undefined;
+		},
+		itemName: function (id) {
+			var item = this.$root.items[id];
+			return item ? item.name : undefined;
+		},
+		summonerName: function (id) {
+			var summoner = this.$root.summonerSpells[id];
+			return summoner ? summoner.name : undefined;
 		}
 	}
 });
