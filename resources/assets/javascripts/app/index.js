@@ -35,6 +35,7 @@ export default Vue.extend({
 			maps:           {},
 			summonerSpells: {},
 			isLoading:      true,
+			baseURL: '/',
 		}
 	},
 
@@ -58,6 +59,8 @@ export default Vue.extend({
 	},
 
 	ready: function () {
+		this.baseURL = document.body.getAttribute('data-base')
+
 		// Read XSRF token
 		var xsrfToken = Cookies.get('XSRF-TOKEN')
 		if (xsrfToken) {

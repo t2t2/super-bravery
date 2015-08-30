@@ -3,7 +3,6 @@
   "version": "0.0.1",
   "private": true,
   "dependencies": {
-    "js-base64": "^2.1.9",
     "js-cookie": "^2.0.3",
     "vue": "^0.12.12",
     "vue-resource": "^0.1.13",

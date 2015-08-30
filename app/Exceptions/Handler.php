@@ -44,7 +44,7 @@ class Handler extends ExceptionHandler {
 				return response()->json(['error' => 'Session timed out. Please refresh the page.'], 431);
 			} elseif (env('APP_DEBUG', false)) {
 				return response()->json([
-					'error' => 'Server Error: ' . $e->getMessage() . '(' . $e->getFile() . ':' . $e->getLine() . ')'
+					'error' => 'Server Error: ' . $e
 				], 500);
 			} else {
 				return response()->json(['error' => 'Whoops, looks like something went wrong.'], 500);

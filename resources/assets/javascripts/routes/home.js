@@ -1,5 +1,4 @@
 import Cookies from 'js-cookie'
-import Base64 from 'js-base64'
 import Vue from 'vue'
 
 import champion from '../components/champion'
@@ -28,7 +27,7 @@ export default Vue.extend({
 		return {
 			isAgreed:  	  false,
 			showSettings: false,
-			build:        false,
+			build:        null,
 			gettingBuild: false,
 			message:      '',
 			settings: {
@@ -39,13 +38,11 @@ export default Vue.extend({
 	},
 	computed: {
 		buildUrl: function () {
-			var data = new Array;
-			for (var o in this.build) {
-				data.push(this.build[o]);
+			if(this.build) {
+				return this.$root.baseURL + '/build/' + this.build.code;
+			} else {
+				return '';
 			}
-			
-			var hash = Base64.Base64.encodeURI([].concat.apply([], data).join(':'));
-			return 'http://super-bravery.app/build/' + hash;
 		}
 	},
 	methods: {
@@ -69,10 +66,10 @@ export default Vue.extend({
 			// Ok to go
 			this.gettingBuild = true
 			this.showSettings = false
-			this.build = false
+			this.build = null
 
-			this.$root.$http.post('/api/roll', this.settings).success((data) => {
-				this.build = data
+			this.$root.$http.post('/api/roll', this.settings).success((response) => {
+				this.build = response.data
 				this.gettingBuild = false
 			}).error((data) => {
 				if(typeof data == 'object') {

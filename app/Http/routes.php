@@ -15,6 +15,11 @@ use Laravel\Lumen\Application;
 
 $app->group(['namespace' => 't2t2\SuperBravery\Http\Controllers\Api', 'prefix' => 'api'], function (Application $app) {
 
+	$app->get('build/{code}', [
+		'as'   => 'api.generator.build',
+		'uses' => 'GeneratorController@getBuild',
+	]);
+
 	$app->post('roll', [
 		'as'   => 'api.generator.roll',
 		'uses' => 'GeneratorController@roll',

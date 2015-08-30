@@ -6,7 +6,7 @@
 
 	<link rel="stylesheet" href="<?= asset('assets/stylesheets/app.css') ?>" />
 </head>
-<body data-config="<?= e(route('frontend.config')) ?>">
+<body data-config="<?= e(route('frontend.config')) ?>" data-base="<?= e(url()) ?>">
 	<div id="application" class="no-js">
 		Javascript not loaded
 	</div>

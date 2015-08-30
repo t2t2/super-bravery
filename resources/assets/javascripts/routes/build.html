@@ -1,6 +1,10 @@
 <div id="content">
-	<div class='container'>
-		<div class="build">
+	<div class="container">
+		<div v-if="$loadingRouteData">
+			<h3>Loading Build...</h3>
+		</div>
+		<div class="container error" v-repeat="line in message" v-text="line"></div>
+		<div class="build" v-if="build">
 			<div class="champion">
 				<Champion champion-id="{{ build.champion }}" width="128" height="128"></Champion>
 			</div>
