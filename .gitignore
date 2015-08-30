@@ -2,3 +2,5 @@
 /public/assets
 /vendor
 .env
+
+public/rev-manifest.json

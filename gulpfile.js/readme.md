@@ -1,0 +1,1 @@
+[Based on greypants/gulp-starter](https://github.com/greypants/gulp-starter/tree/2.0)
