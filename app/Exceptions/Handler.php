@@ -3,6 +3,7 @@
 namespace t2t2\SuperBravery\Exceptions;
 
 use Exception;
+use Illuminate\Session\TokenMismatchException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Laravel\Lumen\Exceptions\Handler as ExceptionHandler;
 
@@ -39,9 +40,12 @@ class Handler extends ExceptionHandler {
 	 */
 	public function render($request, Exception $e) {
 		if ($request->wantsJson()) {
-			if (env('APP_DEBUG', false)) {
-				return response()->json(['error' => 'Server Error: ' . $e->getMessage() . '(' . $e->getFile() . $e->getLine() . ')'],
-					500);
+			if ($e instanceof TokenMismatchException) {
+				return response()->json(['error' => 'Session timed out. Please refresh the page.'], 431);
+			} elseif (env('APP_DEBUG', false)) {
+				return response()->json([
+					'error' => 'Server Error: ' . $e->getMessage() . '(' . $e->getFile() . ':' . $e->getLine() . ')'
+				], 500);
 			} else {
 				return response()->json(['error' => 'Whoops, looks like something went wrong.'], 500);
 			}
